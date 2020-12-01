@@ -12,10 +12,6 @@
     "lint": "eslint --ext .ts,.vue,.js src scripts",
     "lint:fix": "npm run lint -- --fix"
   },
-  "author": {
-    "email": "example@email.com",
-    "name": "example"
-  },
   "license": "MIT",
   "dependencies": {
     "electron-updater": "^4.3.5",
