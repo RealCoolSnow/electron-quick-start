@@ -1,20 +1,20 @@
 const createWindow = require('./helpers/create-window.js')
 const { app } = require('electron')
-const contextMenu = require('electron-context-menu')
+// const contextMenu = require('electron-context-menu')
 
 const resolveConfig = require('tailwindcss/resolveConfig')
 const tailwindConfig = require('../tailwind.config.js')
 const fullTailwindConfig = resolveConfig(tailwindConfig)
 
-contextMenu({
-  showSearchWithGoogle: false,
-  showCopyImage: false,
-  prepend: (defaultActions, params, browserWindow) => [
-    {
-      label: 'its like magic 💥',
-    },
-  ],
-})
+// contextMenu({
+//   showSearchWithGoogle: false,
+//   showCopyImage: false,
+//   prepend: (defaultActions, params, browserWindow) => [
+//     {
+//       label: 'quick start',
+//     },
+//   ],
+// })
 
 const isDev = !app.isPackaged
 

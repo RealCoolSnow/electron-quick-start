@@ -1,29 +1,24 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "downlevelIteration": true,
-    "resolveJsonModule": true,
-    "strict": true,
-    "moduleResolution": "node",
     "baseUrl": ".",
-    "paths": {
-      "/@/*": [
-        "src/*"
-      ]
-    },
+    "module": "ESNext",
+    "target": "es2016",
+    "lib": ["DOM", "ESNext"],
+    "strict": true,
     "esModuleInterop": true,
-    "experimentalDecorators": true,
+    "incremental": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [
+      {
+        "name": "@vuedx/typescript-plugin-vue"
+      }
+    ],
+    "paths": {
+      "/~/*": ["src/*"]
+    }
   },
-  "include": [
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules"]
 }
