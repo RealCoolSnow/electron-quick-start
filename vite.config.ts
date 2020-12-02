@@ -1,7 +1,6 @@
 import path from 'path'
 import { UserConfig } from 'vite'
 import ViteComponents from 'vite-plugin-components'
-import Voie from 'vite-plugin-voie'
 import PurgeIcons from 'vite-plugin-purge-icons'
 import { createMockServer } from 'vite-plugin-mock'
 
@@ -10,9 +9,9 @@ const alias = {
 }
 const config: UserConfig = {
   alias,
+  base: '', // has to set to empty string so the html assets path will be relative
   esbuildTarget: 'es2015',
   plugins: [
-    Voie(),
     ViteComponents({
       alias,
       // Relative paths to the directory to search for components.

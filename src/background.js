@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const urllib = require('url')
 const path = require('path')
 const { app, BrowserWindow, globalShortcut, protocol } = require('electron')
 const WindowStateKeeper = require('electron-window-state')
@@ -23,7 +24,7 @@ function createWindow(windowName = 'main', options = {}) {
     },
     ...options,
     webPreferences: {
-      devTools: true, // isDev,
+      devTools: isDev,
       spellcheck: false,
       nodeIntegration: true,
       ...(options.webPreferences || {}),
@@ -66,7 +67,11 @@ async function createMainWindow() {
   const port = process.env.PORT || 3000
   const url = isDev
     ? `http://localhost:${port}`
-    : path.join(__dirname, '../dist/index.html')
+    : urllib.format({
+        protocol: 'file',
+        pathname: path.join(__dirname, '../dist/index.html'),
+        slashes: true,
+      })
   await mainWindow.loadURL(url)
 }
 
