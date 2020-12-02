@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { app } = require('electron')
+const { app, globalShortcut, protocol } = require('electron')
 const createWindow = require('./helpers/create-window.js')
 // const contextMenu = require('electron-context-menu')
 
@@ -19,6 +19,10 @@ const createWindow = require('./helpers/create-window.js')
 
 const isDev = !app.isPackaged
 
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'app', privileges: { secure: true, standard: true } },
+])
+
 let mainWindow
 
 function createMainWindow() {
@@ -33,6 +37,9 @@ function createMainWindow() {
   if (isDev) {
     mainWindow.loadURL(`http://localhost:${port}`)
     setTimeout(() => mainWindow.loadURL(`http://localhost:${port}`), 1000)
+    globalShortcut.register('CommandOrControl+Shift+i', () => {
+      mainWindow.webContents.openDevTools()
+    })
   } else {
     mainWindow.loadFile('dist/index.html')
   }
@@ -45,3 +52,16 @@ app.on('activate', () => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
+
+// Exit cleanly on request from parent process in development mode.
+if (isDev) {
+  if (process.platform === 'win32') {
+    process.on('message', (data) => {
+      if (data === 'graceful-exit') app.quit()
+    })
+  } else {
+    process.on('SIGTERM', () => {
+      app.quit()
+    })
+  }
+}
