@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const urllib = require('url')
 const path = require('path')
 const { app, BrowserWindow, globalShortcut, protocol } = require('electron')
 const WindowStateKeeper = require('electron-window-state')
@@ -67,12 +66,16 @@ async function createMainWindow() {
   const port = process.env.PORT || 3000
   const url = isDev
     ? `http://localhost:${port}`
-    : urllib.format({
-        protocol: 'file',
-        pathname: path.join(__dirname, '../dist/index.html'),
-        slashes: true,
-      })
-  await mainWindow.loadURL(url)
+    : path.join(__dirname, '../dist/index.html')
+
+  if (isDev) {
+    await mainWindow.loadURL(url)
+    setTimeout(() => {
+      mainWindow.loadURL(url)
+    }, 1000)
+  } else {
+    await mainWindow.loadURL(url)
+  }
 }
 
 // This method will be called when Electron has finished

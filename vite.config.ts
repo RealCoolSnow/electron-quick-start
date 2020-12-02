@@ -5,11 +5,11 @@ import PurgeIcons from 'vite-plugin-purge-icons'
 import { createMockServer } from 'vite-plugin-mock'
 
 const alias = {
-  '/@/': path.resolve(__dirname, 'src'),
+  '/@/': path.join(__dirname, 'src'),
 }
 const config: UserConfig = {
   alias,
-  base: '', // has to set to empty string so the html assets path will be relative
+  base: '',
   esbuildTarget: 'es2015',
   plugins: [
     ViteComponents({
