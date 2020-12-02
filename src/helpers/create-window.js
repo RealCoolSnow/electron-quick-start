@@ -1,4 +1,5 @@
-const { app, screen, BrowserWindow } = require('electron')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { app, BrowserWindow } = require('electron')
 const windowStateKeeper = require('electron-window-state')
 
 const isProd = app.isPackaged
@@ -22,14 +23,12 @@ module.exports = function createWindow(windowName = 'main', options = {}) {
     },
   }
 
-  let windowState = windowStateKeeper({
+  const windowState = windowStateKeeper({
     defaultWidth: winOptions.minWidth,
     defaultHeight: winOptions.minHeight,
   })
 
-  let win
-
-  win = new BrowserWindow({
+  const win = new BrowserWindow({
     ...winOptions,
     x: windowState.x,
     y: windowState.y,
