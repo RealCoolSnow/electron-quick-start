@@ -12,9 +12,7 @@ const config: UserConfig = {
   alias,
   esbuildTarget: 'es2015',
   plugins: [
-    Voie({
-      importMode: 'sync',
-    }),
+    Voie(),
     ViteComponents({
       alias,
       // Relative paths to the directory to search for components.

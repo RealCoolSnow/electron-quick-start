@@ -1,55 +1,97 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { app, globalShortcut, protocol } = require('electron')
-const createWindow = require('./helpers/create-window.js')
-// const contextMenu = require('electron-context-menu')
-
-// const resolveConfig = require('tailwindcss/resolveConfig')
-// const tailwindConfig = require('../tailwind.config.js')
-// const fullTailwindConfig = resolveConfig(tailwindConfig)
-
-// contextMenu({
-//   showSearchWithGoogle: false,
-//   showCopyImage: false,
-//   prepend: (defaultActions, params, browserWindow) => [
-//     {
-//       label: 'quick start',
-//     },
-//   ],
-// })
+const path = require('path')
+const { app, BrowserWindow, globalShortcut, protocol } = require('electron')
+const WindowStateKeeper = require('electron-window-state')
 
 const isDev = !app.isPackaged
+let mainWindow
 
+// Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } },
 ])
 
-let mainWindow
+function createWindow(windowName = 'main', options = {}) {
+  const winOptions = {
+    minWidth: 800,
+    minHeight: 600,
+    titleBarStyle: 'hidden',
+    autoHideMenuBar: true,
+    trafficLightPosition: {
+      x: 20,
+      y: 32,
+    },
+    ...options,
+    webPreferences: {
+      devTools: true, // isDev,
+      spellcheck: false,
+      nodeIntegration: true,
+      ...(options.webPreferences || {}),
+    },
+  }
 
-function createMainWindow() {
+  const windowState = WindowStateKeeper({
+    defaultWidth: winOptions.minWidth,
+    defaultHeight: winOptions.minHeight,
+  })
+
+  const win = new BrowserWindow({
+    ...winOptions,
+    x: windowState.x,
+    y: windowState.y,
+    width: windowState.width,
+    height: windowState.height,
+  })
+  windowState.manage(win)
+
+  win.once('ready-to-show', () => {
+    win.show()
+    win.focus()
+  })
+  return win
+}
+
+async function createMainWindow() {
   mainWindow = createWindow('main', {
+    icon: 'public/logo.ico',
+    webPreferences: {
+      // 取消跨域限制
+      webSecurity: false,
+    },
     // backgroundColor: fullTailwindConfig.theme.colors.primary[800],
   })
   mainWindow.once('close', () => {
     mainWindow = null
   })
-
   const port = process.env.PORT || 3000
+  const url = isDev
+    ? `http://localhost:${port}`
+    : path.join(__dirname, '../dist/index.html')
+  await mainWindow.loadURL(url)
+}
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', () => {
+  createMainWindow()
   if (isDev) {
-    mainWindow.loadURL(`http://localhost:${port}`)
-    setTimeout(() => mainWindow.loadURL(`http://localhost:${port}`), 1000)
     globalShortcut.register('CommandOrControl+Shift+i', () => {
       mainWindow.webContents.openDevTools()
     })
-  } else {
-    mainWindow.loadFile('dist/index.html')
   }
-}
+})
 
-app.once('ready', createMainWindow)
+// On macOS it's common to re-create a window in the app when the
+// dock icon is clicked and there are no other windows open.
 app.on('activate', () => {
   if (!mainWindow) createMainWindow()
 })
+
+// Quit when all windows are closed.
 app.on('window-all-closed', () => {
+  // On macOS it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') app.quit()
 })
 

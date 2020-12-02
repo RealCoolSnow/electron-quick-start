@@ -1,6 +1,6 @@
 {
   "name": "electron-quick-start",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -13,7 +13,7 @@
     "postinstall": "install-app-deps"
   },
   "dependencies": {
-    "@vueuse/core": "^4.0.0-rc.3",
+    "@vueuse/core": "^4.0.0-rc.5",
     "axios": "^0.20.0",
     "electron-window-state": "^5.0.3",
     "lodash-es": "^4.17.15",
@@ -24,19 +24,19 @@
     "vuex": "^4.0.0-rc.1"
   },
   "devDependencies": {
-    "electron": "^11.0.3",
-    "electron-builder": "^22.9.1",
-    "npm-run-all": "^4.1.5",
     "@antfu/eslint-config-vue": "^0.3.4",
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^26.0.16",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@vue/compiler-sfc": "^3.0.2",
     "@vuedx/typescript-plugin-vue": "^0.2.4-0",
-    "tailwindcss": "^1.9.4",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
+    "electron": "^11.0.3",
+    "electron-builder": "^22.9.1",
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
+    "npm-run-all": "^4.1.5",
     "pnpm": "^5.13.4",
+    "tailwindcss": "^1.9.4",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2",
     "vite": "^1.0.0-rc.9",
@@ -48,15 +48,33 @@
   },
   "main": "src/background.js",
   "build": {
+    "appId": "app.quickstart",
     "directories": {
       "output": "build"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": true,
+      "differentialPackage": true,
+      "allowElevation": false
     },
     "mac": {
       "target": "dmg"
     },
+    "win": {
+      "icon": "public/logo.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
     "files": [
       "src/background.js",
-      "src/helpers",
       "dist",
       "tailwind.config.js",
       "package.json"
