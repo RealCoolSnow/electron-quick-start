@@ -7,6 +7,7 @@ import { createMockServer } from 'vite-plugin-mock'
 const alias = {
   '/@/': path.join(__dirname, 'src'),
 }
+
 const config: UserConfig = {
   alias,
   base: './',
@@ -25,7 +26,7 @@ const config: UserConfig = {
     createMockServer({
       mockPath: 'mock',
       watchFiles: true,
-      localEnabled: process.env.NODE_ENV !== 'production',
+      localEnabled: process.env.NODE_ENV === 'development',
     }),
   ],
   optimizeDeps: {

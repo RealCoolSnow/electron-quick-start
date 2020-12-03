@@ -10,10 +10,10 @@
   },
   "scripts": {
     "dev": "run-p dev:vite dev:electron",
-    "dev:vite": "vite",
+    "dev:vite": "cross-env NODE_ENV=development vite",
     "dev:electron": "electron src/background.js",
     "build": "run-s build:vite build:electron",
-    "build:vite": "vite build --base=./",
+    "build:vite": "cross-env NODE_ENV=production vite build --base=./",
     "build:electron": "electron-builder build",
     "postinstall": "install-app-deps"
   },
