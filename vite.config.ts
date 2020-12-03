@@ -9,7 +9,7 @@ const alias = {
 }
 const config: UserConfig = {
   alias,
-  base: '',
+  base: './',
   esbuildTarget: 'es2015',
   plugins: [
     ViteComponents({
@@ -25,7 +25,7 @@ const config: UserConfig = {
     createMockServer({
       mockPath: 'mock',
       watchFiles: true,
-      localEnabled: process.env.NODE_ENV === 'development',
+      localEnabled: process.env.NODE_ENV !== 'production',
     }),
   ],
   optimizeDeps: {

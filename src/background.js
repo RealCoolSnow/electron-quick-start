@@ -4,8 +4,8 @@ const { app, BrowserWindow, globalShortcut, protocol } = require('electron')
 const WindowStateKeeper = require('electron-window-state')
 
 const isDev = !app.isPackaged
-
-const isDevTools = isDev
+const isDevTools = true
+const loadTryTimes = 10
 
 let mainWindow
 
@@ -71,14 +71,13 @@ async function createMainWindow() {
     ? `http://localhost:${port}`
     : path.join(__dirname, '../dist/index.html')
 
-  if (isDev) {
-    await mainWindow.loadURL(url)
-    setTimeout(() => {
-      mainWindow.loadURL(url)
-    }, 1000)
-  } else {
-    await mainWindow.loadURL(url)
+  let t = loadTryTimes
+  const loadUrl = () => {
+    mainWindow.loadURL(url).catch(() => {
+      if (t-- > 0) setTimeout(loadUrl, 500)
+    })
   }
+  loadUrl()
 }
 
 // This method will be called when Electron has finished
