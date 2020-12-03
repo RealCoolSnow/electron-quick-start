@@ -10,7 +10,6 @@ const alias = {
 
 const config: UserConfig = {
   alias,
-  base: './',
   esbuildTarget: 'es2015',
   plugins: [
     ViteComponents({

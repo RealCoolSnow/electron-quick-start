@@ -75,7 +75,13 @@
           ]
         }
       ]
-    }
+    },
+    "files": [
+      "src/background.js",
+      "dist",
+      "tailwind.config.js",
+      "src/assets/"
+    ]
   },
   "prettier": {
     "semi": false,

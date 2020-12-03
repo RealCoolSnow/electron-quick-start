@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '/@/pages/Home.vue'
 
 const routes: Array<any> = [
@@ -19,7 +19,7 @@ const routes: Array<any> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(), // must be hash mode
   routes,
 })
 
