@@ -4,6 +4,9 @@ const { app, BrowserWindow, globalShortcut, protocol } = require('electron')
 const WindowStateKeeper = require('electron-window-state')
 
 const isDev = !app.isPackaged
+
+const isDevTools = isDev
+
 let mainWindow
 
 // Scheme must be registered before the app is ready
@@ -23,7 +26,7 @@ function createWindow(windowName = 'main', options = {}) {
     },
     ...options,
     webPreferences: {
-      devTools: isDev,
+      devTools: isDevTools,
       spellcheck: false,
       nodeIntegration: true,
       ...(options.webPreferences || {}),
@@ -83,17 +86,17 @@ async function createMainWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   createMainWindow()
-  if (isDev) {
-    globalShortcut.register('CommandOrControl+Shift+i', () => {
-      mainWindow.webContents.openDevTools()
-    })
-  }
 })
 
 // On macOS it's common to re-create a window in the app when the
 // dock icon is clicked and there are no other windows open.
 app.on('activate', () => {
   if (!mainWindow) createMainWindow()
+  if (isDevTools) {
+    globalShortcut.register('CommandOrControl+Shift+i', () => {
+      mainWindow.webContents.openDevTools()
+    })
+  }
 })
 
 // Quit when all windows are closed.

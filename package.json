@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
+  "description": "electron quick start project",
+  "author": {
+    "name": "CoolSnow",
+    "email": "coolsnow0927@gmail.com"
+  },
   "scripts": {
     "dev": "run-p dev:vite dev:electron",
     "dev:vite": "vite",
@@ -70,13 +75,7 @@
           ]
         }
       ]
-    },
-    "files": [
-      "src/background.js",
-      "dist",
-      "tailwind.config.js",
-      "package.json"
-    ]
+    }
   },
   "prettier": {
     "semi": false,
