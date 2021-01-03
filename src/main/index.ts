@@ -2,56 +2,23 @@
 import { join } from 'path'
 import is_dev from 'electron-is-dev'
 import dotenv from 'dotenv'
-const { app, BrowserWindow, globalShortcut, protocol } = require('electron')
-const WindowStateKeeper = require('electron-window-state')
+import { app, BrowserWindow, globalShortcut, protocol } from 'electron'
 dotenv.config({ path: join(__dirname, '../../.env') })
 
 const isDev = is_dev
 const isDevTools = is_dev
 
-let mainWindow: any
+let win: BrowserWindow | null
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } },
 ])
 
-function createWindow(windowName = 'main', options = {}) {
-  const winOptions = {
-    minWidth: 800,
-    minHeight: 600,
-    titleBarStyle: 'hidden',
-    autoHideMenuBar: true,
-    trafficLightPosition: {
-      x: 20,
-      y: 32,
-    },
-    ...options,
-  }
-
-  const windowState = WindowStateKeeper({
-    defaultWidth: winOptions.minWidth,
-    defaultHeight: winOptions.minHeight,
-  })
-
-  const win = new BrowserWindow({
-    ...winOptions,
-    x: windowState.x,
-    y: windowState.y,
-    width: windowState.width,
-    height: windowState.height,
-  })
-  windowState.manage(win)
-
-  win.once('ready-to-show', () => {
-    win.show()
-    win.focus()
-  })
-  return win
-}
-
 async function createMainWindow() {
-  mainWindow = createWindow('main', {
+  win = new BrowserWindow({
+    width: 800,
+    height: 600,
     icon: 'public/icon.ico',
     webPreferences: {
       devTools: isDevTools,
@@ -64,15 +31,15 @@ async function createMainWindow() {
     },
     // backgroundColor: fullTailwindConfig.theme.colors.primary[800],
   })
-  mainWindow.once('close', () => {
-    mainWindow = null
+  win.once('close', () => {
+    win = null
   })
   const port = process.env.PORT || 3000
   const url = isDev
     ? `http://localhost:${port}`
     : `file://${__dirname}/../render/index.html`
 
-  mainWindow.loadURL(url)
+  win.loadURL(url)
 }
 
 // This method will be called when Electron has finished
@@ -82,14 +49,14 @@ app.on('ready', () => {
   createMainWindow()
   if (isDevTools) {
     globalShortcut.register('CommandOrControl+Shift+i', () => {
-      mainWindow.webContents.openDevTools()
+      win?.webContents.openDevTools()
     })
   }
 })
 // On macOS it's common to re-create a window in the app when the
 // dock icon is clicked and there are no other windows open.
 app.on('activate', () => {
-  if (!mainWindow) createMainWindow()
+  if (!win) createMainWindow()
 })
 
 app.on('will-quit', () => {
