@@ -30,7 +30,12 @@ import { useStore } from 'vuex'
 import MutationTypes from '../store/mutation-types'
 import { formatTime } from '../utils/util'
 import { useHttpTest } from '../test/api-test'
+import LocaleSwitch from '/components/LocaleSwitch.vue'
+
 export default defineComponent({
+  components: {
+    LocaleSwitch,
+  },
   setup() {
     const { t } = useI18n()
     const store = useStore()

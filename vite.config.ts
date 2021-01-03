@@ -1,6 +1,5 @@
 import { join, sep } from 'path'
 import { UserConfig } from 'vite'
-import ViteComponents from 'vite-plugin-components'
 import PurgeIcons from 'vite-plugin-purge-icons'
 import { createMockServer } from 'vite-plugin-mock'
 import dotenv from 'dotenv'
@@ -25,17 +24,6 @@ const config: UserConfig = {
   outDir: join(__dirname, 'dist/render'),
   alias,
   plugins: [
-    ViteComponents({
-      root,
-      alias,
-      // Relative paths to the directory to search for components.
-      // dirs: ['render/components'],
-      // Valid file extensions for components.
-      extensions: ['vue'],
-      // Search for subdirectories
-      deep: true,
-      directoryAsNamespace: true,
-    }),
     PurgeIcons(),
     createMockServer({
       mockPath: 'mock',

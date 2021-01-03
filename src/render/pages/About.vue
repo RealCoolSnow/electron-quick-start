@@ -15,7 +15,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
+import LocaleSwitch from '/components/LocaleSwitch.vue'
+
 export default defineComponent({
+  components: {
+    LocaleSwitch,
+  },
   setup() {
     const { t } = useI18n()
     return { t }
