@@ -1,24 +1,43 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "module": "ESNext",
-    "target": "es2016",
-    "lib": ["DOM", "ESNext"],
-    "strict": true,
-    "esModuleInterop": true,
-    "incremental": true,
-    "skipLibCheck": true,
+    "target": "esnext",
+    "module": "UMD",
     "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "react",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
-    "plugins": [
-      {
-        "name": "@vuedx/typescript-plugin-vue"
-      }
-    ],
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
     "paths": {
-      "/@/*": ["src/*"]
-    }
+      "/assets/*": [
+        "src/render/assets/*"
+      ],
+      "/components/*": [
+        "src/render/components/*"
+      ],
+      "/store/*": [
+        "src/render/store/*"
+      ],
+      "/service/*": [
+        "src/render/service/*"
+      ],
+      "/pages/*": [
+        "src/render/pages/*"
+      ],
+      "/utils/*": [
+        "src/render/utils/*"
+      ]
+    },
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["dist", "node_modules"]
+  "include": [
+    "src/**/*",
+    "typings/*.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }
