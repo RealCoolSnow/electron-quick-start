@@ -69,9 +69,6 @@ const config: UserConfig = {
       },
     ],
   },
-  rollupOutputOptions: {
-    format: 'commonjs',
-  },
 }
 
 export default config
