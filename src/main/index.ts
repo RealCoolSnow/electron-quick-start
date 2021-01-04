@@ -51,6 +51,7 @@ app.on('ready', () => {
     globalShortcut.register('CommandOrControl+Shift+i', () => {
       win?.webContents.openDevTools()
     })
+    win?.webContents.openDevTools()
   }
 })
 // On macOS it's common to re-create a window in the app when the
