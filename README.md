@@ -1,2 +1,2 @@
 # electron-quick-start
-Quick start project with electron &amp; vue3
+Quick start project with electron &amp; vite &amp; vue3
