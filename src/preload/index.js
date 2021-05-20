@@ -2,14 +2,14 @@
 /** docoment 加载完成 */
 function domReady(...args) {
   const condition = args.length ? [...args] : ['complete', 'interactive']
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (condition.includes(document.readyState)) {
       resolve(true)
-    } else {
+    }
+    else {
       document.addEventListener('readystatechange', () => {
-        if (condition.includes(document.readyState)) {
+        if (condition.includes(document.readyState))
           resolve(true)
-        }
       })
     }
   })
@@ -17,17 +17,17 @@ function domReady(...args) {
 
 /** 插入 loading */
 function insertLoading() {
-  const loadingStyle = document.createElement('style');
-  const loadingBox = document.createElement('div');
+  const loadingStyle = document.createElement('style')
+  const loadingBox = document.createElement('div')
 
   loadingStyle.textContent += `
   /* https://projects.lukehaas.me/css-loaders/ */
-  .loading-box { height: 100vh; width: 100vw; position: fixed; left: 0; top: 0; display: flex; align-items: center; background-color: #242424; z-index: 9; }
+  .loading-box { height: 100vh; width: 100vw; position: fixed; left: 0; top: 0; display: flex; align-items: center; background-color: #ffffff; z-index: 9; }
 
   .load1 .loader,
   .load1 .loader:before,
   .load1 .loader:after {
-    background: #ffffff;
+    background: #242424;
     -webkit-animation: load1 1s infinite ease-in-out;
     animation: load1 1s infinite ease-in-out;
     width: 1em;
@@ -35,7 +35,7 @@ function insertLoading() {
   }
 
   .load1 .loader {
-    color: #ffffff;
+    color: #242424;
     text-indent: -9999em;
     margin: 88px auto;
     position: relative;
@@ -92,37 +92,37 @@ function insertLoading() {
       box-shadow: 0 -2em;
       height: 5em;
     }
-  }`;
+  }`
 
-  loadingBox.classList.add('loading-box', 'load1');
-  loadingBox.innerHTML += '<div class="loader"></div>';
+  loadingBox.classList.add('loading-box', 'load1')
+  loadingBox.innerHTML += '<div class="loader"></div>'
 
   const appendLoading = () => {
-    document.head.appendChild(loadingStyle);
-    document.body.appendChild(loadingBox);
-  };
+    document.head.appendChild(loadingStyle)
+    document.body.appendChild(loadingBox)
+  }
 
   const removeLoading = () => {
-    document.head.removeChild(loadingStyle);
-    document.body.removeChild(loadingBox);
-  };
+    document.head.removeChild(loadingStyle)
+    document.body.removeChild(loadingBox)
+  }
 
   return { loadingStyle, loadingBox, removeLoading, appendLoading }
 }
 
-; (async function () {
-  await domReady();
+(async function() {
+  await domReady()
 
-  let _isCallClosePreloadLoading = false;
-  const { removeLoading, appendLoading } = insertLoading();
+  let _isCallClosePreloadLoading = false
+  const { removeLoading, appendLoading } = insertLoading()
 
   window.ClosePreloadLoading = () => {
-    _isCallClosePreloadLoading = true;
-    removeLoading();
-  };
+    _isCallClosePreloadLoading = true
+    removeLoading()
+  }
 
   // 5 秒超时自动关闭
-  setTimeout(() => !_isCallClosePreloadLoading && removeLoading(), 4999);
+  setTimeout(() => !_isCallClosePreloadLoading && removeLoading(), 4999)
 
-  appendLoading();
-})();
+  appendLoading()
+})()
