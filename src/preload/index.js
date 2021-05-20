@@ -27,7 +27,7 @@ function insertLoading() {
   .load1 .loader,
   .load1 .loader:before,
   .load1 .loader:after {
-    background: #242424;
+    background: #8a8a8a;
     -webkit-animation: load1 1s infinite ease-in-out;
     animation: load1 1s infinite ease-in-out;
     width: 1em;
@@ -35,7 +35,7 @@ function insertLoading() {
   }
 
   .load1 .loader {
-    color: #242424;
+    color: #8a8a8a;
     text-indent: -9999em;
     margin: 88px auto;
     position: relative;
