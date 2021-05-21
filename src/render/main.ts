@@ -8,9 +8,9 @@ import store from './store'
 
 const i18n = createI18nWithLocale(store.getters.language)
 
-const app = createApp(App)
+const app = createApp(App as any)
 app.use(store)
 app.use(i18n)
 app.use(router)
 
-app.mount('#app')
+app.mount('#app').$nextTick(window.ClosePreloadLoading)
