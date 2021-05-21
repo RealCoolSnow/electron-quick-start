@@ -1,3 +1,4 @@
+import _Store from 'electron-store'
 import { formatTime } from '../utils/util'
 
 /**
@@ -25,7 +26,6 @@ class Config {
         default: '',
       },
     }
-    const _Store = require('electron-store')
     this.store = new _Store(/* { schema } */)
     this.store.set('launch_time', formatTime(new Date()))
     console.log('config path: ', this.store.path)
