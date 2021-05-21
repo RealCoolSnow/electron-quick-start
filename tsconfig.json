@@ -11,22 +11,22 @@
     "baseUrl": "./",
     "strict": true,
     "paths": {
-      "/assets/*": [
+      "/@/assets/*": [
         "src/render/assets/*"
       ],
-      "/components/*": [
+      "/@/components/*": [
         "src/render/components/*"
       ],
-      "/store/*": [
+      "/@/store/*": [
         "src/render/store/*"
       ],
-      "/service/*": [
+      "/@/service/*": [
         "src/render/service/*"
       ],
-      "/pages/*": [
+      "/@/pages/*": [
         "src/render/pages/*"
       ],
-      "/utils/*": [
+      "/@/utils/*": [
         "src/render/utils/*"
       ]
     },

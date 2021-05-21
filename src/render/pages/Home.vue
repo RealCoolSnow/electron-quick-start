@@ -7,7 +7,7 @@
       <label class="text-blue-500">{{ t('about') }}</label>
     </router-link>
   </div>
-  <img src="/assets/logo.png" class="logo-icon mx-auto m-4">
+  <img src="/@/assets/logo.png" class="logo-icon mx-auto m-4">
   <!-- <Icon name="logo" class="logo-icon mx-auto m-4" /> -->
   <h1 @click="showAbout">
     {{ t('app_name') }}
@@ -30,7 +30,7 @@ import { useStore } from 'vuex'
 import MutationTypes from '../store/mutation-types'
 import { formatTime } from '../utils/util'
 import { useHttpTest } from '../test/api-test'
-import LocaleSwitch from '/components/LocaleSwitch.vue'
+import LocaleSwitch from '/@/components/LocaleSwitch.vue'
 
 export default defineComponent({
   components: {

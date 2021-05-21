@@ -9,12 +9,12 @@ dotenv.config({ path: join(__dirname, '.env') })
 const root = join(__dirname, 'src/render')
 
 const alias = {
-  '/assets/': join(__dirname, 'src/render/assets'),
-  '/components/': join(__dirname, 'src/render/components'),
-  '/pages/': join(__dirname, 'src/render/pages'),
-  '/store/': join(__dirname, 'src/render/store'),
-  '/service/': join(__dirname, 'src/render/service'),
-  '/utils/': join(__dirname, 'src/render/utils'),
+  '/@/assets/': join(__dirname, 'src/render/assets'),
+  '/@/components/': join(__dirname, 'src/render/components'),
+  '/@/pages/': join(__dirname, 'src/render/pages'),
+  '/@/store/': join(__dirname, 'src/render/store'),
+  '/@/service/': join(__dirname, 'src/render/service'),
+  '/@/utils/': join(__dirname, 'src/render/utils'),
 }
 
 const config: UserConfig = {
