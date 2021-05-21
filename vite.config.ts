@@ -50,6 +50,7 @@ const config: UserConfig = {
       'https',
       'path',
       'electron',
+      'file',
     ],
     plugins: [
       {

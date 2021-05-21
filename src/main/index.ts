@@ -2,9 +2,10 @@
 import { join } from 'path'
 import is_dev from 'electron-is-dev'
 import dotenv from 'dotenv'
-import { app, BrowserWindow, globalShortcut, protocol } from 'electron'
-dotenv.config({ path: join(__dirname, '../../.env') })
+import { app, BrowserWindow, globalShortcut, protocol, Menu } from 'electron'
+import { Config } from '../render/libs/config'
 
+dotenv.config({ path: join(__dirname, '../../.env') })
 const isDev = is_dev
 const isDevTools = is_dev
 
@@ -31,6 +32,8 @@ async function createMainWindow() {
     },
     // backgroundColor: fullTailwindConfig.theme.colors.primary[800],
   })
+  // 取消菜单栏
+  Menu.setApplicationMenu(null)
   win.once('close', () => {
     win = null
   })
@@ -47,7 +50,7 @@ async function createMainWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   createMainWindow()
-  if (isDevTools) {
+  if (Config.getInstance().isDebug() || isDevTools) {
     globalShortcut.register('CommandOrControl+Shift+i', () => {
       win?.webContents.openDevTools()
     })
