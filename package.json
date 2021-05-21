@@ -15,7 +15,8 @@
     "dev:ele": "node -r ts-node/register script/build --env=development --watch",
     "build:vue": "vite build",
     "build:ele": "node -r ts-node/register script/build --env=production",
-    "build": "rm -rf dist && npm run build:vue && npm run build:ele && electron-builder"
+    "build": "rm -rf dist && npm run build:vue && npm run build:ele && electron-builder",
+    "build-win": "rmdir /s/q dist && npm run build:vue && npm run build:ele && electron-builder"
   },
   "dependencies": {
     "axios": "^0.21.1",
