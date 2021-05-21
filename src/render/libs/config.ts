@@ -5,17 +5,9 @@ import { formatTime } from '../utils/util'
  * 存储路径:
  * app.getPath('userData')\AppData\Roaming\app-name\config.json
  */
-class Config {
-  static _instance: any
+class _Config {
   store: any
-  static getInstance() {
-    if (!this._instance)
-      this._instance = new Config()
-    return this._instance
-  }
-
   constructor() {
-    console.log('Config')
     const schema = {
       debug: {
         type: 'boolean',
@@ -72,7 +64,7 @@ class Config {
     this.store.clear()
   }
 }
-
+const Config = new _Config()
 export {
   Config,
 }

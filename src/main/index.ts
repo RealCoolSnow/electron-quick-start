@@ -7,7 +7,7 @@ import { Config } from '../render/libs/config'
 
 dotenv.config({ path: join(__dirname, '../../.env') })
 const isDev = is_dev
-const isDevTools = is_dev
+const isDevTools = Config.isDebug() || is_dev
 
 let win: BrowserWindow | null
 
@@ -50,7 +50,7 @@ async function createMainWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   createMainWindow()
-  if (Config.getInstance().isDebug() || isDevTools) {
+  if (isDevTools) {
     globalShortcut.register('CommandOrControl+Shift+i', () => {
       win?.webContents.openDevTools()
     })
@@ -60,6 +60,7 @@ app.on('ready', () => {
 // On macOS it's common to re-create a window in the app when the
 // dock icon is clicked and there are no other windows open.
 app.on('activate', () => {
+  console.log('activate', Config.isDebug())
   if (!win) createMainWindow()
 })
 
