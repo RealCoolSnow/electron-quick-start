@@ -49,7 +49,8 @@ export default (env = 'production') => {
         ],
       }),
       copy({
-        targets: [{ src: join(__dirname, '../src/preload'), dest: join(__dirname, '../dist') }],
+        targets: [{ src: 'src/preload', dest: 'dist' }],
+        verbose: true,
       }),
     ],
     external: [
