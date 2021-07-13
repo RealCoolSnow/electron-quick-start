@@ -58,6 +58,6 @@ else {
     })
     .catch((error) => {
       spinner.stop()
-      console.log(`\n${TAG} ${chalk.red('构建报错')}\n`, error, '\n')
+      console.log(`\n${TAG} ${chalk.red('Electron build failed.')}\n`, error, '\n')
     })
 }
