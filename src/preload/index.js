@@ -98,12 +98,12 @@ function insertLoading() {
   loadingBox.innerHTML += '<div class="loader"></div>'
 
   const appendLoading = () => {
-    document.head.appendChild(loadingStyle)
+    document.getElementsByTagName('head')[0].appendChild(loadingStyle)
     document.body.appendChild(loadingBox)
   }
 
   const removeLoading = () => {
-    document.head.removeChild(loadingStyle)
+    document.getElementsByTagName('head')[0].removeChild(loadingStyle)
     document.body.removeChild(loadingBox)
   }
 
