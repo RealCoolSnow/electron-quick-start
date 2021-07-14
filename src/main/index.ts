@@ -25,7 +25,7 @@ async function createMainWindow() {
       devTools: isDevTools,
       spellcheck: false,
       nodeIntegration: true,
-      // preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '../preload/index.js'),
       // 取消跨域限制
       webSecurity: false,
       enableRemoteModule: true,
