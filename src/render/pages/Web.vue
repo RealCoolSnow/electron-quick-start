@@ -134,7 +134,8 @@ export default defineComponent({
 .nav-icon:active {
   @apply opacity-50;
 }
-.nav-icon-disabled {
-  @apply opacity-50;
+.nav-icon-disabled,
+.nav-icon-disabled:active {
+  @apply opacity-20;
 }
 </style>
