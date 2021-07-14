@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-screen h-screen">
-    <div class="flex flex-row bg-gray-100">
+    <div class="flex flex-row bg-gray-100 bg-opacity-50">
       <i
         :class="'nav-icon ' + (state.canGoBack ? '' : 'nav-icon-disabled')"
         :title="t('web.back')"
@@ -53,6 +53,7 @@ import { useI18n } from 'vue-i18n'
 import { showToast } from '../utils/util'
 const { clipboard, shell } = require('electron')
 const TAG = 'pages/web'
+const WebURL: string = import.meta.env.VITE_WEB_URL?.toString() || ''
 enum BrowserCommand {
   Back,
   Prev,
@@ -66,7 +67,7 @@ export default defineComponent({
     const { t } = useI18n()
     const browser = ref()
     const state = reactive({
-      url: 'http://www.baidu.com',
+      url: WebURL,
       canGoBack: false,
       canGoForward: false,
       allowpopups: false,
