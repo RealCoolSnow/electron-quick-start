@@ -1,6 +1,14 @@
 {
-    "app_name": "Vue3 Quick Start",
-    "home": "首页",
-    "about": "关于",
-    "about_msg": "这是关于页面"
+  "app_name": "Vue3 Quick Start",
+  "home": "首页",
+  "about": "关于",
+  "about_msg": "这是关于页面",
+  "web": {
+    "back": "后退",
+    "prev": "前进",
+    "refresh": "刷新",
+    "copy": "复制链接地址",
+    "open_external": "用浏览器打开",
+    "copied": "链接已复制"
+  }
 }

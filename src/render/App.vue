@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
+  <div>
     <router-view />
   </div>
 </template>
@@ -11,7 +11,7 @@ export default defineComponent({
   setup() {
     console.log('app created')
     const router = useRouter()
-    router.push('/')
+    router.push('/web')
   },
 })
 </script>

@@ -18,17 +18,18 @@ protocol.registerSchemesAsPrivileged([
 
 async function createMainWindow() {
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    // width: 1024,
+    // height: 800,
     icon: 'public/icon.ico',
     webPreferences: {
       devTools: isDevTools,
       spellcheck: false,
       nodeIntegration: true,
-      preload: join(__dirname, '../preload/index.js'),
+      // preload: join(__dirname, '../preload/index.js'),
       // 取消跨域限制
       webSecurity: false,
       enableRemoteModule: true,
+      webviewTag: true,
     },
     // backgroundColor: fullTailwindConfig.theme.colors.primary[800],
   })
