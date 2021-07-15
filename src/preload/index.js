@@ -98,13 +98,19 @@ function insertLoading() {
   loadingBox.innerHTML += '<div class="loader"></div>'
 
   const appendLoading = () => {
-    document.getElementsByTagName('head')[0].appendChild(loadingStyle)
-    document.body.appendChild(loadingBox)
+    try {
+      document.getElementsByTagName('head')[0].appendChild(loadingStyle)
+      document.body.appendChild(loadingBox)
+    }
+    catch (e) {}
   }
 
   const removeLoading = () => {
-    document.getElementsByTagName('head')[0].removeChild(loadingStyle)
-    document.body.removeChild(loadingBox)
+    try {
+      document.getElementsByTagName('head')[0].removeChild(loadingStyle)
+      document.body.removeChild(loadingBox)
+    }
+    catch (e) {}
   }
 
   return { loadingStyle, loadingBox, removeLoading, appendLoading }
